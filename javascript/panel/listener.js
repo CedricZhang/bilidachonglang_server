@@ -141,10 +141,9 @@ var Listener = (function () {
                 if (result && result.code && result.code > 0) {
                     Dom.showAlert({
                         title: "提交成功！",
-                        body: "问题提交成功，问题ID：" + (result.data['qid'] || "未知") + "，请等待审核。"
-                    }, function () {
-                        showUncheckQuestion();
-                    })
+                        body: "提交成功！"
+                    });
+                    showUncheckQuestion();
                 }
                 else {
                     Dom.showAlert({
