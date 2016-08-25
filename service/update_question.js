@@ -12,7 +12,8 @@ var updateQuestion = (function () {
             "`answer0` =  '" + (paras.answer0 || "正确答案" ) + "'," +
             "`answer1` =  '" + (paras.answer1 || "" ) + "'," +
             "`answer2` =  '" + (paras.answer2 || "" ) + "'," +
-            "`answer3` =  '" + (paras.answer3 || "" ) + "' " +
+            "`answer3` =  '" + (paras.answer3 || "" ) + "'," +
+            "`uploader` =  '" + (paras.uploader || "" ) + "' " +
             "WHERE  `questions`.`qid` =" + paras.qid + ";";
 
         var _result = {};
