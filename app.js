@@ -35,11 +35,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/create',require("./routes/create"));
 app.use('/api',require("./routes/api"));
 app.use('/login',require("./routes/login"));
+app.use('/', routes);
 
 app.use('/', checkLogin);
 app.use('/panel',require("./routes/panel"));
 app.use('/private_api',require("./routes/private_api"));
-app.use('/', routes);
+
 //app.use('/users', users);
 
 // catch 404 and forward to error handler
