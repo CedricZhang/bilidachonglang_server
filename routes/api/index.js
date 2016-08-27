@@ -6,6 +6,8 @@ var queryAmount = require("../../service/query_amount").queryAmount;
 var select10Questions = require("../../service/select_10_questions").select10Questions;
 var updateRaisedTimes = require("../../service/update_raised_times").updateRaisedTimes;
 var PINS = require("../../settings/pins").PINS;
+var addScoreRecord = require("../../service/add_score_record").addScoreRecord;
+var getTop10= require("../../service/get_top_10").getTop10;
 /* GET create question page. */
 router.post('/create', function (req, res) {
 
@@ -59,9 +61,7 @@ router.post('/query_amount', function (req, res) {
     })
 });
 router.post('/get_questions', function (req, res) {
-
-
-    function shuffle(array) {
+function shuffle(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;
 
         // While there remain elements to shuffle...
@@ -117,4 +117,44 @@ router.post('/get_questions', function (req, res) {
         })
     }
 });
+
+router.post('/add_record',function(req,res){
+    if(req && req.body && req.body.questionKey && req.body.questionKey == PINS.questionKey){
+        var userName = req.query.userName || "";
+        var score = req.query.score || 0;
+        if(score > 0){
+            addScoreRecord.add({
+                userName:userName,
+                score:score
+            },function(result){
+                if (result.code = code.SUCCESS) {
+                    res.json({code:code.SUCCESS})
+                } else {
+                    res.json({
+                        code: result.code,
+                        info: result.error
+                    })
+                }
+            })
+        }else{
+            res.json({code:code.SUCCESS})
+        }
+    }else{
+        res.json({
+            code:code.BAD_REQUEST,
+            info:"BAD_REQUEST"
+        })
+    }
+});
+
+router.post('/get_top_10',function(req,res){
+    getTop10.get(function(result){
+        if(result.code > 0){
+            res.json(result.data)
+        }else{
+            res.json(result)
+        }
+    })
+});
+
 module.exports = router;
