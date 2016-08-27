@@ -118,7 +118,7 @@ function shuffle(array) {
     }
 });
 
-router.post('/add_record',function(req,res){
+    router.post('/add_record',function(req,res){
     if(req && req.body && req.body.questionKey && req.body.questionKey == PINS.questionKey){
         var userName = req.query.userName || "";
         var score = req.query.score || 0;
