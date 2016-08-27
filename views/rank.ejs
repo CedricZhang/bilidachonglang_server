@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<style type="text/css">
+    body{
+        background-color: black;
+        margin: 0
+    }
+</style>
+<body>
+<div style="color:orange;font-size:30px"> 学霸排行榜 </div>
+<div id='rank'> </div>
+
+<script type="text/javascript">
+    var getTop10 = function(){
+        $.ajax({
+            url:'http://dangxueba.me:5000/api/get_top_10',
+            type:'POST',
+            success:function(result)
+            {
+                if(result){console.log(result);
+                    str = "";
+                    for(var i = 0; i < result.length;i++){
+                        if(i==0){
+                            str += "<p style='color:red'>第1名</p><p style='color:yellow'>"+result[i].username+" - " + result[i].total + "分</p>";
+                        }
+                        else if(i==1){
+                            str += "<p style='color:lime'>第2名</p><p style='color:yellow'>"+result[i].username+" - " + result[i].total + "分</p>";
+                        }
+                        else if(i==2){
+                            str += "<p style='color:blue'>第3名</p><p style='color:yellow'>"+result[i].username+" - " + result[i].total + "分</p>";
+                        }else{
+                            str += "<p style='color:white'>第"+(i+1)+"名</p><p style='color:yellow'>"+result[i].username+" - " + result[i].total + "分</p>";
+
+                        }
+                    }
+                    $("#rank").html(str);
+                }
+            }
+        })
+    };
+
+
+
+    getTop10();
+    setInterval(function(){
+        getTop10();
+    },60000)
+</script>
+</body>
+</html>

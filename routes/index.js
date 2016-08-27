@@ -5,5 +5,9 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.redirect('/create');
 });
+router.get('/rank', function(req, res, next) {
+  res.render('rank')
+});
+
 
 module.exports = router;
